@@ -1,0 +1,61 @@
+TensorFlow 2.0 Upgrade Script
+-----------------------------
+Converted 3 files
+Detected 4 issues that require attention
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+File: APPM/script/APPM.py
+--------------------------------------------------------------------------------
+APPM/script/APPM.py:390:12: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+APPM/script/APPM.py:421:4: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+APPM/script/APPM.py:422:4: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+File: APPM/script/prediction.py
+--------------------------------------------------------------------------------
+APPM/script/prediction.py:266:19: ERROR: tf.nn.dropout called without arguments, so automatic fix was disabled. tf.nn.dropout has changed the semantics of the second argument.
+================================================================================
+Detailed log follows:
+
+================================================================================
+================================================================================
+Input tree: 'APPM/'
+================================================================================
+--------------------------------------------------------------------------------
+Processing file 'APPM/script/APPM.py'
+ outputting to 'APPM2/script/APPM.py'
+--------------------------------------------------------------------------------
+
+54:16: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+62:8: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+70:4: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+75:17: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+87:16: INFO: Renamed keyword argument for tf.nn.conv2d from filter to filters
+253:19: INFO: Changing keep_prob arg of tf.nn.dropout to rate
+
+279:10: INFO: Added keywords to args of function 'tf.reduce_mean'
+279:25: INFO: Renamed 'tf.nn.softmax_cross_entropy_with_logits_v2' to 'tf.nn.softmax_cross_entropy_with_logits'
+286:33: INFO: Added keywords to args of function 'tf.argmax'
+286:63: INFO: Added keywords to args of function 'tf.argmax'
+287:11: INFO: Added keywords to args of function 'tf.reduce_mean'
+390:12: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+421:4: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+422:4: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'APPM/script/new_read_data.py'
+ outputting to 'APPM2/script/new_read_data.py'
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file 'APPM/script/prediction.py'
+ outputting to 'APPM2/script/prediction.py'
+--------------------------------------------------------------------------------
+
+92:16: INFO: Renamed keyword argument for tf.nn.conv2d from filter to filters
+266:19: ERROR: tf.nn.dropout called without arguments, so automatic fix was disabled. tf.nn.dropout has changed the semantics of the second argument.
+--------------------------------------------------------------------------------
+
