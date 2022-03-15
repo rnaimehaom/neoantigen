@@ -1,3 +1,6 @@
+# genera el conjunto de entrenamiento y testing.
+# es lo mismo que new_read_data.py, pero sin generar los conjuntos de validación
+
 import numpy as np
 import pandas as pd
 import random as rnd
@@ -61,16 +64,17 @@ def getdata_onehot(datafile):   #build testing matrix
     
     #下采样
     new_df_0 = df_train.loc[df_train['BindingCategory']== 0].sample(frac = 1)
-    #上采样
+    
+    ## oversampling #######################################################
     df_1_list = []
-    for i in range(4):
+    for i in range(2):
         df_1_list.append(df_train.loc[df_train['BindingCategory']== 1])
         new_df_1 = pd.concat(df_1_list)
     new_df_train = pd.concat([new_df_0,new_df_1])
     new_df_train = new_df_train.sample(frac = 1.0) #shuffle
 
 
-    #X_train--补齐11mer--one_hot_matrix
+    # one_hot_matrix
     train_data=transformEL(new_df_train)
     trainMatrix = np.empty((0, 11,len(allSequences)), int)      
     for num in range(len(train_data.Peptide)):
@@ -109,28 +113,13 @@ def getdata_onehot(datafile):   #build testing matrix
     ss1 = list(range(trainlen))
     rnd.shuffle(ss1)
     #
-    valsize= int(1000) #Validation set size is 100 for validations dataset
-    X_val1 = trainMatrix[ss1[0:valsize]]
-    Y_val1 = Y_train.iloc[ss1[0:valsize]]
-    X_val2 = trainMatrix[ss1[valsize:(2*valsize)]]
-    Y_val2 = Y_train.iloc[ss1[valsize:(2*valsize)]]
-    X_val3 = trainMatrix[ss1[(2*valsize):(3*valsize)]]
-    Y_val3 = Y_train.iloc[ss1[(2*valsize):(3*valsize)]]    
-
-    trainMatrix = np.delete(trainMatrix,ss1[0:(3*valsize)], axis=0)
-    Y_train = Y_train.drop(Y_train.index[ss1[0:(3*valsize)]])
+    
     # combine training and test datasets
     datasets={}
     datasets['X_train'] = trainMatrix
     datasets['Y_train'] = Y_train.values #traindata.BindingCategory.as_matrix()
     datasets['X_test'] = testMatrix
-    datasets['Y_test'] = Y_test.values
-    datasets['X_val1'] = X_val1
-    datasets['Y_val1'] = Y_val1.values
-    datasets['X_val2'] = X_val2
-    datasets['Y_val2'] = Y_val2.values
-    datasets['X_val3'] = X_val3
-    datasets['Y_val3'] = Y_val3.values
+    datasets['Y_test'] = Y_test.values   
 
     return datasets
     
